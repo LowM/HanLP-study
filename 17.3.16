@@ -5,7 +5,7 @@
 
 分词器：
 HanLP.segment("text");标准分词器，推荐使用，可能出错
-NLPTokenizer.segment("text");NPL分词器，速度略慢，可能有误识别，但实测比标准准 
+NLPTokenizer.segment("text");NLP分词器，速度略慢，可能有误识别，但实测比标准准 
 IndexTokenizer.segment("text");索引分词器，对长词进行全切分，可以获得偏移量，将来可能用得到
 
 配置分词器：
