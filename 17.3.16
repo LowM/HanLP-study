@@ -1,0 +1,45 @@
+使用方法：
+1.build path中导入jar包
+2.修改HanLP.properties中的root
+3.将HanLP.properties复制到工程目录bin下或WEB-INF/lib下
+
+分词器：
+HanLP.segment("text");标准分词器，推荐使用，可能出错
+NLPTokenizer.segment("text");NPL分词器，速度略慢，可能有误识别，但实测比标准准 
+IndexTokenizer.segment("text");索引分词器，对长词进行全切分，可以获得偏移量，将来可能用得到
+
+配置分词器：
+所有分词器都是Segment的子类，提供许多接口以开启关闭人名地名之类的识别；
+直接输入segment.来获取具体有哪些
+
+
+词典：
+CustomDictionary.xx(); 动态增加删除词典  不会保存到词典文件
+日本人名识别与地名识别与机构名识别被默认关闭，需要时开启
+中国人名与音译人名识别默认开启
+
+篇章理解（提取关键）：
+关键词提取：
+	使用HanLP.extractKeyword(document,size);或者TextRankKeyword.getKeywordList(document,size)
+自动摘要：
+	使用HanLP.extractSummary(document,size);或者TextRankSentence.getTopSentenceList(document,size);测试之后发现，自动摘要并不是很好用
+短语提取：
+	使用HanLP,extractPhrase(document,size);或者MutualInformationEntropyPhraseExtractor.extractPhrase(text,size);
+
+
+转换：
+简繁转换（感觉不太用得到）：
+	HanLP.convertToTraditionalChinese(text);
+	HanLP.convertToSimplifiedChinese(text);
+拼音转换：
+	HanLP.convertToPinyinList(text);
+	返回的是一个列表，需要遍历列表显示
+
+
+语法分析（感觉用不到，这里不写了）
+
+智能推荐：
+计算两个词汇之间的距离：CoreSynonymDictionary.distence(a,b);
+文本推荐：
+	使用suggester.addSentence(title);添加需要搜索的句子
+	使用suggester.suggest(text,size);匹配相似的句子
